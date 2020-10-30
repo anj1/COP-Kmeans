@@ -119,13 +119,13 @@ def compute_centers(clusters, dataset, k, ml_info):
         group_ids = sorted(range(len(ml_groups)),
                            key=lambda x: current_scores[x] - ml_scores[x],
                            reverse=True)
-
         for j in range(k-k_new):
-            gid = group_ids[j]
-            cid = k_new + j
-            centers[cid] = ml_centroids[gid]
-            for i in ml_groups[gid]:
-                clusters[i] = cid
+            if j < len(group_ids):
+                gid = group_ids[j]
+                cid = k_new + j
+                centers[cid] = ml_centroids[gid]
+                for i in ml_groups[gid]:
+                    clusters[i] = cid
 
     return clusters, centers
 
